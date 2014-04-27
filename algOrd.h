@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "fileIO.h"
+#include "struct.h"
 
 #ifndef ALGORD_H
 #define	ALGORD_H
@@ -24,8 +25,11 @@ void mergeSort(int **vet, int tam);
     
 void selectionSort(int **vet, int tam);    
     
-void insertionSort(int **mat, int tam);
+void insertionSort(liPrimCod **mat, int tam);
 
+void insertionSortNome(tsecNome **lista, int tam);
+    
+void insertionSortCurso(tsecCurso **lista, int tam);
 
 
 #ifdef	__cplusplus

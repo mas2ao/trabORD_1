@@ -13,6 +13,7 @@
 #include "algOrd.h"
 #include "createIndex.h"
 #include "createMatrix.h"
+#include "struct.h"
 
 /*
  * 
@@ -22,52 +23,68 @@ int main(int argc, char** argv) {
     int tamTotal, i;
     tamTotal = QUANT_INI;
     
-    int **indexPrim = (int**) malloc(sizeof(int)*tamTotal);     //matriz que de indice primario (codigo x offset)
+    liPrimCod *primCod[tamTotal];
     for (i=0; i<tamTotal; i++){
-        indexPrim[i] = (int*) malloc(sizeof(int)*2);            //precisa ser 2??
+        primCod[i] = (liPrimCod*) malloc(sizeof(liPrimCod));
     }
     
-    char **listaNomes = (char**) malloc(sizeof(char)*tamTotal+1);
+    tsecNome *secNome[tamTotal];
     for (i=0; i<tamTotal; i++){
-        listaNomes[i] = (char*) malloc(sizeof(char)*MAX_REC_SIZE);
+        secNome[i] = (tsecNome*) malloc(sizeof(tsecNome));
     }
     
-    char **indexSecNome = (char**) malloc(sizeof(char)*tamTotal);     //matriz que de indice secundario por nome (nome x RRN)
+    tsecCurso *secCurso[tamTotal];
     for (i=0; i<tamTotal; i++){
-        indexSecNome[i] = (char*) malloc(sizeof(char)*2);
+        secCurso[i] = (tsecCurso*) malloc(sizeof(tsecCurso));
     }
     
-    int **chavePrimNome = (int**) malloc(sizeof(int)*tamTotal);     //matriz que de chave primaria para nome (nome x prox)
+//    char *listaNomes[tamTotal];
+//    for (i=0; i<tamTotal; i++){
+//        listaNomes[i] = (char*) malloc(sizeof(char)*MAX_REC_SIZE);
+//    }
+    
+    tliNome *liNome[tamTotal];
     for (i=0; i<tamTotal; i++){
-        chavePrimNome[i] = (int*) malloc(sizeof(int)*2);
+        liNome[i] = (tliNome*) malloc(sizeof(tliNome));
     }
     
-    int **indexSecCurso = (int**) malloc(sizeof(int)*tamTotal);     //matriz que de indice secundario por curso (curso x RRN)
-    for (i=0; i<tamTotal; i++){
-        indexSecCurso[i] = (int*) malloc(sizeof(int)*2);
-    }
+//    int *chaveSecNome[tamTotal];
+//    for (i=0; i<tamTotal; i++){
+//        chaveSecNome[i] = (int*) malloc(sizeof(int));
+//    }
     
-    int **chavePrimCurso = (int**) malloc(sizeof(int)*tamTotal);     //matriz que de indice secundario por curso (curso x prox)
-    for (i=0; i<tamTotal; i++){
-        chavePrimCurso[i] = (int*) malloc(sizeof(int)*2);
-    }
+    importFile("dados.txt");                    //importa dados - ok
     
-    importFile("dados.txt");
+    criaChavePrimCod(primCod, tamTotal);         //cria chave primaria(CODIGO) - ok
+    criaChaveSecNome(primCod, secNome, tamTotal);             //cria chave secundaria(NOTA) - ok
+    criaChaveSecCurso(primCod, secCurso, tamTotal);           //cria chave secundaria(CURSO) - ok
     
-    criaMatPrim(indexPrim, tamTotal);
+    
     
 //    for (i=0; i<tamTotal; i++){       //imprime sem ordenadar
 //        printf("%d  => %d | %d\n", i, indexPrim[i][0], indexPrim[i][1]);
 //    }
 //    printf("\n--------------------------------------\n");
-    insertionSort(indexPrim, tamTotal);
-    criaIndicePrimario(indexPrim, tamTotal);
-    criaListaNomes(indexPrim, listaNomes, tamTotal);
+    
+    insertionSort(primCod, tamTotal);                 //ordena chave primaria(codigo) - ok
+    criaIndicePrimario(primCod, tamTotal);            //cria arquivo indice primario(ARQUIVO) - ok
+    insertionSortNome(secNome, tamTotal);             //ordena chave secundaria(nome) - ok
+    insertionSortCurso(secCurso, tamTotal);             //ordena chave secundaria(curso) - ok
+   
+    criaIndiceSecNome(liNome, secNome, tamTotal);
+    
+//    criaListaNomes(indexPrim, listaNomes, tamTotal);
+//    insertionSortString(listaNomes, tamTotal);
+//    criaIndiceSecAluno(chavePrim, listaNomes, chaveSecNome, tamTotal);
+    
+
+    
 //    criaMatSecAluno(indexSecNome, tamTotal);
     
 //    for (i=0; i<tamTotal; i++){       //imprime apos ordenado
 //        printf("%d  => %d | %d\n", i, indexPrim[i][0], indexPrim[i][1]);
 //    }
+    
     
 //    FILE *teste;
 //    char dado;

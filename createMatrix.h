@@ -17,9 +17,7 @@
 extern "C" {
 #endif
 
-void criaMatPrim(int **mat,int tamTotal);    
-    
-void criaListaNomes( int **indexPrim, char **listaNomes, int tamTotal);
+
 
 
 #ifdef	__cplusplus

@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "fileIO.h"
+#include "struct.h"
 
 #ifndef CREATEINDEX_H
 #define	CREATEINDEX_H
@@ -18,8 +19,7 @@
 extern "C" {
 #endif
 
-void criaIndicePrimario(int **indexPrim, int tamTotal);
-
+void criaIndicePrimario(liPrimCod **indexPrim, int tamTotal);
 
 #ifdef	__cplusplus
 }

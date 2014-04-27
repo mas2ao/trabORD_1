@@ -21,8 +21,12 @@ extern "C" {
 #define DELIM_CHR '|'
 #define DELIM_STR "|"
 #define MAX_REC_SIZE 256
+#define MAX_CURSO_SIZE 15
+#define MAX_REC_SIZE 256
 #define TAM_HEADER 32
 #define QUANT_INI 241
+#define TAM_COD 6
+#define TAM_OFFSET 10
 
 
 #ifdef	__cplusplus

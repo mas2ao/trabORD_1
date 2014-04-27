@@ -1,5 +1,8 @@
 #include <stdlib.h>
 
+#include "fileIO.h"
+#include "struct.h"
+
 void merge(int **vet, int tam){
     int meio, i, j, k;
     
@@ -77,18 +80,74 @@ void selectionSort(int **vet, int tam){
     }
 }
 
-void insertionSort(int **mat, int tam){
-    int i, j, atual, atual2;
+void insertionSort(tprimCod **primCod, int tam){
+    int i, j, cod, offset;
+    
     for (i=0; i<tam; i++){
-        atual = mat[i][0];
-        atual2 = mat[i][1];
+        cod = primCod[i]->codigo;
+        offset = primCod[i]->offset;
         j = i-1;
-        while ((j>=0) && (atual<mat[j][0])){
-            mat[j+1][0] = mat[j][0];
-            mat[j+1][1] = mat[j][1];
+        while ((j>=0) && (cod<primCod[j]->codigo)){
+            primCod[j+1]->codigo = primCod[j]->codigo;
+            primCod[j+1]->offset = primCod[j]->offset;
             j--;
         }
-        mat[j+1][0] = atual;
-        mat[j+1][1] = atual2;
+        primCod[j+1]->codigo = cod;
+        primCod[j+1]->offset = offset;
     }
+//    //ordenado(CODIGO)
+//    for (i=0; i<tam; i++){
+//        printf("%d => %d\n", primCod[i]->codigo, primCod[i]->offset);
+//    }
+    
+}
+
+void insertionSortNome(tsecNome **lista, int tam){
+    int i, j, menor, cod;
+    char aux[MAX_REC_SIZE];
+    
+    for (i=0; i<tam; i++){
+        strcpy(aux, lista[i]->string);
+        cod = lista[i]->codigo;
+        j = i-1;
+        while((j >= 0) && (strcmp(aux, lista[j]->string)<0)){
+            strcpy(lista[j+1]->string, lista[j]->string);
+            lista[j+1]->codigo = lista[j]->codigo;
+            j--;
+        }
+        strcpy(lista[j+1]->string, aux);
+        lista[j+1]->codigo = cod;
+    }
+//    //ordenado(NOME)
+//    for (i=0; i<tam; i++){
+//        for (j=0; j<strlen(lista[i]->string); j++){
+//            printf("%c", lista[i]->string[j]);
+//        }
+//        printf(" => %d\n", lista[i]->codigo);
+//    }
+}
+
+void insertionSortCurso(tsecCurso **lista, int tam){
+    int i, j, menor, cod;
+    char aux[MAX_CURSO_SIZE];
+    
+    for (i=0; i<tam; i++){
+        strcpy(aux, lista[i]->curso);
+        cod = lista[i]->codigo;
+        j = i-1;
+        while((j >= 0) && (strcmp(aux, lista[j]->curso)<0)){
+            strcpy(lista[j+1]->curso, lista[j]->curso);
+            lista[j+1]->codigo = lista[j]->codigo;
+            j--;
+        }
+        strcpy(lista[j+1]->curso, aux);
+        lista[j+1]->codigo = cod;
+    }
+//    //ordenado(CURSO)
+//    for (i=0; i<tam; i++){
+//        for (j=0; j<strlen(lista[i]->curso); j++){
+//            printf("%c", lista[i]->curso[j]);
+//        }
+//        printf(" => %d\n", lista[i]->codigo);
+//    }
 }

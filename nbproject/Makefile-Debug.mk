@@ -37,9 +37,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/algOrd.o \
 	${OBJECTDIR}/createIndex.o \
+	${OBJECTDIR}/createKey.o \
 	${OBJECTDIR}/createMatrix.o \
 	${OBJECTDIR}/importFile.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/menu.o \
+	${OBJECTDIR}/search.o
 
 
 # C Compiler Flags
@@ -76,6 +79,11 @@ ${OBJECTDIR}/createIndex.o: createIndex.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/createIndex.o createIndex.c
 
+${OBJECTDIR}/createKey.o: createKey.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/createKey.o createKey.c
+
 ${OBJECTDIR}/createMatrix.o: createMatrix.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -90,6 +98,16 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+
+${OBJECTDIR}/menu.o: menu.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/menu.o menu.c
+
+${OBJECTDIR}/search.o: search.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/search.o search.c
 
 # Subprojects
 .build-subprojects:
